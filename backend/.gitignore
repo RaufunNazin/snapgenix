@@ -1,34 +1,11 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+.history
 
-# C extensions
-*.so
-
-# Distribution / packaging
-dist/
-build/
-*.egg-info/
-MANIFEST
-
-# Virtual environments
-venv/
-env/
-.venv/
-
-# IDE files
-.vscode/
-.idea/
-
-# Jupyter Notebook
-.ipynb_checkpoints/
-
-# Environment variables file
 .env
+/.env
 
-# Log files
-*.log
+env
+./.env
 
-# Database files
-*.db
+
+/venv
+venv
