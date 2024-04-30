@@ -51,15 +51,18 @@ const Login = () => {
         pauseOnHover={false}
         theme="colored"
       />
-      <div className="fixed top-8 flex items-center gap-x-4 lg:top-16">
+      <button
+        onClick={() => navigate("/")}
+        className="fixed top-8 flex items-center gap-x-4 lg:top-16"
+      >
         <img src="src/assets/logo.png" alt="logo" className="h-12" />
-      </div>
+      </button>
       <div className="flex flex-col items-center gap-y-2">
         <p className="text-3xl font-black text-xgray lg:text-4xl">
           Login to your account
         </p>
         <p className="lg:text-md text-sm text-xgray">
-          Together, let&apos;s build a cleaner, greener future.
+          Let&apos;s Create remarkable stories with creativity
         </p>
       </div>
       <div className="flex w-[360px] flex-col gap-y-8 lg:w-[400px]">
@@ -92,7 +95,7 @@ const Login = () => {
           <div className="flex justify-between items-center mt-2">
             <div className="text-xlightgray font-light">Need an account?</div>
             <button
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/register")}
               className="text-xblue hover:underline"
             >
               Create One!

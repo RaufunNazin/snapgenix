@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,9 +54,12 @@ const Register = () => {
         pauseOnHover={false}
         theme="colored"
       />
-      <div className="fixed top-8 flex items-center gap-x-4 lg:top-16">
+      <button
+        onClick={() => navigate("/")}
+        className="fixed top-8 flex items-center gap-x-4 lg:top-16"
+      >
         <img src="src/assets/logo.png" alt="logo" className="h-12" />
-      </div>
+      </button>
       <div className="flex flex-col items-center gap-y-2">
         <p className="text-3xl font-black text-xgray lg:text-4xl">
           Create your account
