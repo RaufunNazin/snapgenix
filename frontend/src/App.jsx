@@ -46,7 +46,7 @@ const App = () => {
         className="bg-red-500 decoration-transparent"
       />
       <button onClick={uploadPhoto}>Upload</button>
-      <img src="src/assets/photo.png" alt="img" />
+      <img src="http://localhost:8000/assets/photo.png" alt="img" />
     </div>
   );
 };
