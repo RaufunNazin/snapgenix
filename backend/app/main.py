@@ -14,7 +14,7 @@ app = FastAPI()
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
 origins = [
-    "*",
+    "http://localhost:5173",
 ]
 
 app.add_middleware(

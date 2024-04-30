@@ -26,7 +26,7 @@ class ResponseUser(BaseModel) :
     role : int 
 
     class Config :
-        orm_mode = True
+        from_attributes = True
         
 class UserLogin(BaseModel) :
     username : EmailStr
@@ -46,4 +46,4 @@ class TokenResponse(BaseModel) :
     user : ResponseUser
     
     class Config :
-        orm_mode = True
+        from_attributes = True

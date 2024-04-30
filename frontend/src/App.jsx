@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
   const [file, setFile] = useState(null);
@@ -39,15 +43,13 @@ const App = () => {
   };
 
   return (
-    <div>
-      <input
-        type="file"
-        onChange={handleFileChange}
-        className="bg-red-500 decoration-transparent"
-      />
-      <button onClick={uploadPhoto}>Upload</button>
-      <img src="http://localhost:8000/assets/photo.png" alt="img" />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

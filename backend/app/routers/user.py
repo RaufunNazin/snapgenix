@@ -16,6 +16,11 @@ def home():
 @router.post("/register", status_code = 201, response_model = Token, tags=['user'])
 def create_user(user : User ,db : Session = Depends(get_db)) :
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+    # check for same email or username
+    if db.query(models.User).filter(models.User.email == user.email).first():
+        raise HTTPException(status_code=400, detail="Email already registered")
+    if db.query(models.User).filter(models.User.username == user.username).first():
+        raise HTTPException(status_code=400, detail="Username unavailable")
     hashed_pass = pwd_context.hash(user.password)
     user.password = hashed_pass
     new_user = models.User(**user.dict())

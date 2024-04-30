@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        xblue: "#1A73E8",
+        xblue: "#00ADEF",
         xgray: "#555555",
         xlightgray: "#A1A1A1",
         xdark: "#151515",
         xlightergray: "#F0F0F0",
         xlightestgray: "#FAFAFA",
-        xred: "#EC3232",
+        xred: "#ff5733",
         xyellow: "#EED36E",
       },
     },
