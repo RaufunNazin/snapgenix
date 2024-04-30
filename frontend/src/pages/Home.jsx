@@ -212,7 +212,7 @@ const Home = () => {
           duration={40}
           pauseOnHover={false}
           blurBorders={true}
-          blurBoderColor={"#fff"}
+          blurBoderColor={"#FAFAFA"}
         >
           <Slider.Slide>
             <img src="src/assets/logo.png" alt="any" className="w-32 grayscale" />
@@ -227,6 +227,7 @@ const Home = () => {
       </div>
 
       {/* Team */}
+
       <div className="py-24">
         <div className="text-xdark uppercase font-bold text-[40px] text-center mb-20">
           Meet Our Dedicated Team
@@ -256,6 +257,7 @@ const Home = () => {
       </div>
 
       {/* Pricing */}
+      
       <div className="py-24" ref={pricingRef}>
         <div className="text-xdark uppercase font-bold text-[40px] text-center mb-20">
           Pick or Personalize Your Plan

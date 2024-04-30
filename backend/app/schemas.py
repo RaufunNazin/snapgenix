@@ -7,6 +7,10 @@ class User(BaseModel) :
     password : str
     role : int
     
+class Client(BaseModel) :
+    photo : str
+    name : str
+    
 class Photo(BaseModel) :
     photo : str
     title : str

@@ -27,3 +27,9 @@ class Photo(Base):
     title = Column(String(100), nullable=False)
     description = Column(String(300), nullable=True)
     category = Column(String(50), nullable=False)
+    
+class Client(Base):
+    __tablename__ = "clients"
+    id = Column(Integer, primary_key=True, nullable=False)
+    photo = Column(String(300), nullable=False)
+    name = Column(String(100), nullable=False)

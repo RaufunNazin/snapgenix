@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from . import models
 from .database import engine
-from .routers import user, auth, photo, booking
+from .routers import user, auth, photo, booking, clients
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -29,3 +29,4 @@ app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(photo.router)
 app.include_router(booking.router)
+app.include_router(clients.router)

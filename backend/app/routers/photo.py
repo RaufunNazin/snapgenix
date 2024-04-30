@@ -35,7 +35,7 @@ async def upload_photo(request: Request, photo: UploadFile = File(...), title: s
     current_directory = os.path.dirname(os.path.realpath(__file__))
 
     # Create a new folder named 'photos' in the current directory if it doesn't exist
-    folder_path = os.path.join(current_directory, "..", "..", "assets")
+    folder_path = os.path.join(current_directory, "..", "..", "assets", "images")
     os.makedirs(folder_path, exist_ok=True)
 
     # Save the uploaded photo to the specified folder
