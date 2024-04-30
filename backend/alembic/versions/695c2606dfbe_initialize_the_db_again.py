@@ -32,7 +32,7 @@ def upgrade() -> None:
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('category', sa.String(), nullable=False),
-    sa.Column('link', sa.String(), nullable=False),
+    sa.Column('photo', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     

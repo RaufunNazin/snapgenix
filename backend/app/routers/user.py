@@ -1,11 +1,10 @@
-from fastapi import FastAPI, Response, HTTPException, Depends, APIRouter, Query
-from fastapi.params import Body
+from fastapi import Depends, APIRouter
+from fastapi.exceptions import HTTPException
 from ..database import get_db
 from sqlalchemy.orm import Session
 from ..schemas import User, ResponseUser, Token
 from passlib.context import CryptContext
-from typing import List
-from .. import models, oauth2, utils
+from .. import models, oauth2
 
 router = APIRouter()
 
@@ -25,7 +24,7 @@ def create_user(user : User ,db : Session = Depends(get_db)) :
     access_token = oauth2.create_access_token({ "id": new_user.id, "email": new_user.email })
     return {"access_token": access_token, "token_type": "Bearer" }
 
-@router.get("/me", response_model=ResponseUser, tags=['users'])
+@router.get("/me", response_model=ResponseUser, tags=['user'])
 def get_info(db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
     user_from_db = db.query(models.User).filter(models.User.id == user.id).first()
     return user_from_db

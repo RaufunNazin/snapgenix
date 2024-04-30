@@ -23,7 +23,7 @@ class Booking(Base):
 class Photo(Base):
     __tablename__ = "photos"
     id = Column(Integer, primary_key=True, nullable=False)
+    photo = Column(String(300), nullable=False)
     title = Column(String(100), nullable=False)
     description = Column(String(300), nullable=True)
     category = Column(String(50), nullable=False)
-    link = Column(String(300), nullable=False)

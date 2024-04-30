@@ -6,6 +6,12 @@ class User(BaseModel) :
     email : EmailStr
     password : str
     role : int
+    
+class Photo(BaseModel) :
+    photo : str
+    title : str
+    description : str
+    category : str
      
 class ResponseUser(BaseModel) :
     id : int
