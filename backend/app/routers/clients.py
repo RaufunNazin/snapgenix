@@ -31,7 +31,7 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
         file_object.write(photo.file.read())
 
     # Construct the URL for the uploaded photo
-    photo_url = f"{base_url}assets/{name}.png"
+    photo_url = f"{base_url}assets/clients/{name}.png"
 
     # Save photo information to the database
     db = SessionLocal()
@@ -42,3 +42,9 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
     db.close()
 
     return {"photo": photo.filename, "title": name}
+
+
+@router.get("/clients", tags=['clients'])
+def get_clients(db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
+    clients = db.query(models.Client).all()
+    return clients

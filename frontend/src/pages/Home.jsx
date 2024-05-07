@@ -102,31 +102,33 @@ const Home = () => {
 
       {/* Hero */}
 
-      <div className="flex flex-col items-center gap-y-10 py-24">
-        <div className="text-xdark text-[72px] font-black uppercase text-center">
+      <div className="flex flex-col items-center gap-y-10 px-2 py-8 lg:py-24">
+        <div className="text-xdark text-[40px] lg:text-[72px] font-black uppercase text-center">
           We bring Your Stories <span className="text-xblue">to Life</span>,
           <br />
           Through the Lens.
         </div>
-        <div className="text-[24px] font-light text-xlightgray text-center -mt-8">
-          Creating remarkable stories with creativity, with our passionate crew.
+        <div className="text-[16px] lg:text-[24px] font-light text-xlightgray text-center -mt-8">
+          Creating remarkable stories with creativity,{" "}
+          <br className="block lg:hidden" />
+          with our passionate crew.
         </div>
-        <div className="flex items-center gap-x-4">
-          <button className="border border-xblue bg-xblue uppercase text-white hover:bg-sky-500 hover:border-sky-500 transition-all duration-200 px-6 py-3 flex gap-x-4 items-center">
-            <div>request a shoot</div>
+        <div className="flex flex-col lg:flex-row items-center gap-x-4 gap-y-2">
+          <button className="w-52 lg:w-fit border border-xblue bg-xblue uppercase text-white hover:bg-sky-500 hover:border-sky-500 transition-all duration-200 px-6 py-3 flex gap-x-4 justify-center items-center">
+            <div className="text-[12px] lg:text-[16px]">request a shoot</div>
             <div>
-              <MdCamera className="w-8 h-8 text-white" />
+              <MdCamera className="w-5 lg:w-8 h-5 lg:h-8 text-white" />
             </div>
           </button>
           <button
             onClick={() =>
               pricingRef?.current?.scrollIntoView({ behavior: "smooth" })
             }
-            className="border border-xblue uppercase text-xblue transition-all duration-200 px-6 py-3 flex gap-x-4 items-center"
+            className="w-52 lg:w-fit border border-xblue uppercase text-xblue transition-all duration-200 px-6 py-3 flex gap-x-4 justify-center items-center"
           >
-            <div>see pricing plans</div>
+            <div className="text-[12px] lg:text-[16px]">see pricing plans</div>
             <div>
-              <RiDiscountPercentFill className="w-8 h-8 text-xblue" />
+              <RiDiscountPercentFill className="w-5 lg:w-8 h-5 lg:h-8 text-xblue" />
             </div>
           </button>
         </div>
@@ -134,21 +136,23 @@ const Home = () => {
 
       {/* Services */}
 
-      <div className="py-24">
-        <div className="text-xdark uppercase font-bold text-[40px] text-center mb-20">
+      <div className="py-8 lg:py-24">
+        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Discover Our Awesome Services
         </div>
-        <div className="flex justify-between mx-32">
+        <div className="flex flex-col lg:flex-row justify-between mx-2 lg:mx-32 gap-y-2">
           {services.map((service, i) => (
             <div
               key={i}
-              className="w-[420px] border border-xblue py-10 px-8 flex flex-col gap-y-6"
+              className="w-full lg:w-[420px] border border-xblue py-5 lg:py-10 px-4 lg:px-8 flex flex-col gap-y-2 lg:gap-y-6"
             >
               <div className="flex items-center gap-x-3">
                 <div>{service.icon}</div>
-                <div className="text-xdark text-[28px]">{service.title}</div>
+                <div className="text-xdark text-[20px] lg:text-[28px]">
+                  {service.title}
+                </div>
               </div>
-              <div className="text-xgray text-[20px] font-light">
+              <div className="text-xgray text-[16px] lg:text-[20px] font-light">
                 {service.description}
               </div>
             </div>
@@ -158,11 +162,11 @@ const Home = () => {
 
       {/* Gallery */}
 
-      <div className="py-24 mx-32">
-        <div className="text-xdark uppercase font-bold text-[40px] text-center mb-20">
+      <div className="py-8 lg:py-24 mx-2 lg:mx-32">
+        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Explore Our Creative Projects
         </div>
-        <div className="grid grid-cols-5 gap-3 overflow-auto h-[640px]">
+        <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 overflow-auto h-[640px]">
           <img src="src/assets/food.png" alt="food" className="w-full" />
           <img src="src/assets/food.png" alt="food" className="w-full" />
           <img src="src/assets/food.png" alt="food" className="w-full" />
@@ -203,8 +207,8 @@ const Home = () => {
 
       {/* Clients */}
 
-      <div className="py-24">
-        <div className="text-xdark uppercase font-bold text-[40px] text-center mb-20">
+      <div className="py-8 lg:py-24">
+        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           View Our Cherished Customers
         </div>
         <Slider
@@ -215,39 +219,51 @@ const Home = () => {
           blurBoderColor={"#FAFAFA"}
         >
           <Slider.Slide>
-            <img src="src/assets/logo.png" alt="any" className="w-32 grayscale" />
+            <img
+              src="src/assets/logo.png"
+              alt="any"
+              className="w-24 lg:w-32 grayscale"
+            />
           </Slider.Slide>
           <Slider.Slide>
-            <img src="src/assets/logo.png" alt="any2" className="w-48" />
+            <img
+              src="src/assets/logo.png"
+              alt="any2"
+              className="w-24 lg:w-32"
+            />
           </Slider.Slide>
           <Slider.Slide>
-            <img src="src/assets/logo.png" alt="any3" className="w-36" />
+            <img
+              src="src/assets/logo.png"
+              alt="any3"
+              className="w-24 lg:w-32"
+            />
           </Slider.Slide>
         </Slider>
       </div>
 
       {/* Team */}
 
-      <div className="py-24">
-        <div className="text-xdark uppercase font-bold text-[40px] text-center mb-20">
+      <div className="py-8 lg:py-24">
+        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Meet Our Dedicated Team
         </div>
-        <div className="mx-32 flex justify-evenly items-center">
+        <div className="mx-2 lg:mx-32 grid grid-cols-2 lg:grid-cols-4 items-center">
           {team.map((member, i) => (
-            <div key={i}>
-              <div className="relative flex flex-col gap-y-3">
-                <div className="h-[250px] w-[250px] bg-xlightergray"></div>
-                <div className="absolute top-[5px] left-[5px] w-[240px] h-[240px]">
+            <div key={i} className="flex justify-center">
+              <div className="relative flex flex-col items-center lg:gap-y-3 gap-y-1.5 mb-2">
+                <div className="h-[150px] w-[150px] lg:h-[250px] lg:w-[250px] bg-xlightergray"></div>
+                <div className="absolute top-[5px] left-[5px]">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className=" w-[240px] h-[240px]"
+                    className="w-[140px] h-[140px] lg:w-[240px] lg:h-[240px]"
                   />
                 </div>
-                <div className="text-xdark text-[24px] font-bold">
+                <div className="text-xdark text-[16px] lg:text-[24px] font-bold">
                   {member.name}
                 </div>
-                <div className="text-xdark text-[16px] font-light">
+                <div className="text-xdark text-[12px] lg:text-[16px] font-light">
                   {member.role}
                 </div>
               </div>
@@ -257,12 +273,12 @@ const Home = () => {
       </div>
 
       {/* Pricing */}
-      
-      <div className="py-24" ref={pricingRef}>
-        <div className="text-xdark uppercase font-bold text-[40px] text-center mb-20">
+
+      <div className="py-8 lg:py-24" ref={pricingRef}>
+        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Pick or Personalize Your Plan
         </div>
-        <div className="mx-32 flex justify-evenly">
+        <div className="mx-2 lg:mx-32 flex flex-wrap justify-evenly gap-2">
           {pricing.map((plan, i) => (
             <div
               key={i}
@@ -299,7 +315,7 @@ const Home = () => {
                   Choose Plan
                 </button>
                 <button className="border border-xblue bg-white text-xblue py-2 w-full font-semibold text-[20px] text-center">
-                  Customize Plan
+                  Call to Customize
                 </button>
               </div>
             </div>

@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import api from "./api";
 import { toast } from "react-toastify";
+import Sidebar from "./Components/Sidebar";
 
 const App = () => {
   useEffect(() => {
@@ -27,13 +28,18 @@ const App = () => {
     getProfile();
   }, []);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="App font-body" id="outer-container">
+      <div id="page-wrap">
+        <BrowserRouter>
+          <Sidebar id="sidebar" />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </div>
   );
 };
 
