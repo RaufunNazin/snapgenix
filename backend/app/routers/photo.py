@@ -56,11 +56,16 @@ async def upload_photo(request: Request, photo: UploadFile = File(...), title: s
 
     return {"filename": photo.filename, "title": title, "description": description, "category": category, "photo_url": photo_url}
 
-
 @router.get("/photos", tags=['photo'])
-def get_photos(db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
+def get_photos(db: Session = Depends(get_db)):
     photos = db.query(models.Photo).all()
-    return photos
+    photo_dict = {}
+    for photo in photos:
+        if photo.category in photo_dict:
+            photo_dict[photo.category].append(PhotoResponse(id=photo.id, photo=photo.photo, title=photo.title, description=photo.description, category=photo.category))
+        else:
+            photo_dict[photo.category] = [PhotoResponse(id=photo.id, photo=photo.photo, title=photo.title, description=photo.description, category=photo.category)]
+    return photo_dict
 
 @router.get("/photos/{photo_id}", tags=['photo'])
 def get_photo(photo_id: int, db: Session = Depends(get_db)):

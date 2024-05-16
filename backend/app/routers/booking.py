@@ -1,8 +1,9 @@
 from fastapi import Depends, status, APIRouter, HTTPException
 from ..database import get_db
 from sqlalchemy.orm import Session
-from .. import models
+from .. import models, oauth2
 from ..schemas import Booking
+from app.oauth2 import check_authorization
 
 router = APIRouter()
 
@@ -30,14 +31,18 @@ def search_booking(id: int = None, user_id: int = None, db: Session = Depends(ge
     else:
         return {"message": "Please provide either id or user_id"}
     
-@router.put("/bookings", tags=['booking'])
-def update_booking_status(id: int, status: int, db: Session = Depends(get_db)):
-    booking = db.query(models.Booking).filter(models.Booking.id == id).first()
-    if booking is None:
+    
+#update status of a booking and make it 1 and check if user is admin with patch api with booking id
+@router.patch("/bookings/{id}", tags=['booking'])
+def update_booking_status(id: int, db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
+    check_authorization(user)
+    booking_db = db.query(models.Booking).filter(models.Booking.id == id).first()
+    if booking_db is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Booking not found")
-    booking.status = status
+    db.query(models.Booking).filter(models.Booking.id == id).update({"status": 1})
     db.commit()
-    return {"message": "Booking Updated successfully"}
+    return {"message": "Booking approved successfully"}
+
 
 @router.delete("/bookings", tags=['booking'])
 def delete_booking(id: int, db: Session = Depends(get_db)):

@@ -96,6 +96,7 @@ const Home = () => {
       popular: false,
     },
   ];
+
   return (
     <div className="bg-xlightestgray">
       <Navbar />
@@ -140,7 +141,7 @@ const Home = () => {
         <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Discover Our Awesome Services
         </div>
-        <div className="flex flex-col lg:flex-row justify-between mx-2 lg:mx-32 gap-y-2">
+        <div className="flex flex-col lg:flex-row justify-evenly mx-2 lg:mx-32 gap-y-2">
           {services.map((service, i) => (
             <div
               key={i}
@@ -162,11 +163,11 @@ const Home = () => {
 
       {/* Gallery */}
 
-      <div className="py-8 lg:py-24 mx-2 lg:mx-32">
+      <div className="py-8 lg:py-24 mx-2">
         <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Explore Our Creative Projects
         </div>
-        <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 overflow-auto h-[640px]">
+        {/* <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 overflow-auto h-[640px]">
           <img src="src/assets/food.png" alt="food" className="w-full" />
           <img src="src/assets/food.png" alt="food" className="w-full" />
           <img src="src/assets/food.png" alt="food" className="w-full" />
@@ -202,7 +203,42 @@ const Home = () => {
           <img src="src/assets/food.png" alt="food" className="w-full" />
           <img src="src/assets/food.png" alt="food" className="w-full" />
           <img src="src/assets/food.png" alt="food" className="w-full" />
-        </div>
+        </div> */}
+        <Slider
+          width="270px"
+          duration={30}
+          pauseOnHover={true}
+          blurBorders={true}
+          blurBoderColor={"#FAFAFA"}
+        >
+          <Slider.Slide>
+            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
+          </Slider.Slide>
+          <Slider.Slide>
+            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
+          </Slider.Slide>
+          <Slider.Slide>
+            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
+          </Slider.Slide>
+        </Slider>
+        <Slider
+          width="270px"
+          duration={30}
+          pauseOnHover={true}
+          blurBorders={true}
+          blurBoderColor={"#FAFAFA"}
+          toRight={true}
+        >
+          <Slider.Slide>
+            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
+          </Slider.Slide>
+          <Slider.Slide>
+            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
+          </Slider.Slide>
+          <Slider.Slide>
+            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
+          </Slider.Slide>
+        </Slider>
       </div>
 
       {/* Clients */}

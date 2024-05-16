@@ -36,10 +36,10 @@ const Footer = () => {
           </button>
           <div className="flex lg:flex-col gap-4 items-start">
             <button className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150">
-              About
+              Gallery
             </button>
             <button className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150">
-              Gallery
+              Clients
             </button>
             <button className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150">
               Contact

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({active}) => {
   const navigate = useNavigate();
   return (
     <div className="flex justify-between items-center px-2 lg:px-32 py-3 lg:py-5">
@@ -10,19 +10,19 @@ const Navbar = () => {
       <div className="hidden lg:grid grid-cols-3 gap-x-10">
         <button
           onClick={() => navigate("/")}
-          className="uppercase text-xdark font-light"
-        >
-          about
-        </button>
-        <button
-          onClick={() => navigate("/")}
-          className="uppercase text-xdark font-light"
+          className={`uppercase ${active === "gallery" ? "text-xblue" : "text-xdark"} font-light hover:text-xblue transition-all duration-150`}
         >
           gallery
         </button>
         <button
           onClick={() => navigate("/")}
-          className="uppercase text-xdark font-light"
+          className={`uppercase ${active === "clients" ? "text-xblue" : "text-xdark"} font-light hover:text-xblue transition-all duration-150`}
+        >
+          clients
+        </button>
+        <button
+          onClick={() => navigate("/")}
+          className={`uppercase ${active === "contact" ? "text-xblue" : "text-xdark"} font-light hover:text-xblue transition-all duration-150`}
         >
           contact
         </button>

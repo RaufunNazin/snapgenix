@@ -48,3 +48,13 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
 def get_clients(db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
     clients = db.query(models.Client).all()
     return clients
+
+@router.delete("/clients/{id}", tags=['clients'])
+def delete_client(id: int, db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
+    check_authorization(user)
+    client = db.query(models.Client).filter(models.Client.id == id).first()
+    if client is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Client not found")
+    db.delete(client)
+    db.commit()
+    return {"message": "Client deleted successfully"}
