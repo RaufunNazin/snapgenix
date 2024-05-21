@@ -86,7 +86,7 @@ const Booking = () => {
           <div className="text-xl lg:text-2xl text-xdark font-light">
             Request a booking
           </div>
-          <div className="grid grid-cols-3 gap-5 mt-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
             <div>
               <div className="text-sm text-xgray">Business Name</div>
               <input
@@ -118,7 +118,7 @@ const Booking = () => {
                 onChange={(value) => setType(value)}
               />
             </div>
-            <div className="col-span-3">
+            <div className="lg:col-span-3">
               <div className="text-sm text-xgray">Additional Information</div>
               <textarea
                 className="p-2 border rounded-md w-full outline-none focus:border-xblue transition-all duration-300"

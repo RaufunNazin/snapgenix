@@ -16,7 +16,9 @@ import api from "../api";
 const SidePanel = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(
+    window?.screen?.width < 768 ? true : false
+  );
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -54,7 +56,7 @@ const SidePanel = () => {
   }, []);
 
   return (
-    <div className="sticky top-0 hidden h-screen lg:block">
+    <div className="sticky top-0 h-screen lg:block">
       <Sidebar collapsed={collapsed} className="h-full">
         <Menu>
           <MenuItem

@@ -94,9 +94,9 @@ const ManageClients = () => {
       />
       <SidePanel />
       <div className="flex flex-col flex-1">
-        <div className="w-full p-10">
+        <div className="w-full p-2 lg:p-10">
           <div className="text-2xl">Upload Client Logos</div>
-          <div className="mt-5 grid grid-cols-2 gap-5">
+          <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 gap-5">
             <input
               type="text"
               value={name}
@@ -124,9 +124,9 @@ const ManageClients = () => {
             </button>
           </div>
         </div>
-        <div className="w-full p-10">
+        <div className="w-full p-2 lg:p-10">
           <div className="text-2xl">All Client Logos</div>
-          <div className="mt-5">
+          <div className="mt-5 w-72 lg:w-full">
             <Table
               dataSource={clients}
               rowKey="id"

@@ -106,7 +106,7 @@ const Profile = () => {
                 <div className="text-sm font-bold">Email</div>
                 <div>{user.email}</div>
               </div>
-              <div className="flex justify-center col-span-2 lg:col-auto">
+              <div className="lg:flex hidden justify-center col-span-2 lg:col-auto">
                 <button
                   onClick={logout}
                   className="w-fit px-5 border border-xred text-xred hover:bg-xred hover:text-white transition-all duration-200"

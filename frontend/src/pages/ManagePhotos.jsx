@@ -107,9 +107,9 @@ const ManagePhotos = () => {
       />
       <SidePanel />
       <div className="flex flex-col flex-1">
-        <div className="w-full p-10">
+        <div className="w-full p-2 lg:p-10">
           <div className="text-2xl">Upload Photos</div>
-          <div className="mt-5 grid grid-cols-3 gap-5">
+          <div className="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-5">
             <input
               type="text"
               value={title}
@@ -139,7 +139,7 @@ const ManagePhotos = () => {
             <textarea
               type="text"
               value={description}
-              className="p-2 border rounded-md col-span-3"
+              className="p-2 border rounded-md lg:col-span-3"
               placeholder="Description (optional)"
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -154,9 +154,9 @@ const ManagePhotos = () => {
             </button>
           </div>
         </div>
-        <div className="w-full p-10">
+        <div className="w-full p-2 lg:p-10">
           <div className="text-2xl">All Photos</div>
-          <div className="mt-5">
+          <div className="mt-5 w-72 lg:w-full">
             <Table
               dataSource={photos}
               rowKey="id"

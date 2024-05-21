@@ -5,8 +5,10 @@ import "../index.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Modal } from "antd";
+import api from "../api";
 
 const Sidebar = () => {
+  const [user, setUser] = useState({});
   const nav = useNavigate();
   let location = useLocation();
   const [modal2Open, setModal2Open] = useState(false);
@@ -16,6 +18,21 @@ const Sidebar = () => {
   const to = (address) => {
     setOpen(false);
     nav(`/${address}`);
+  };
+
+  const getProfile = () => {
+    api
+      .get("/me", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const logout = () => {
@@ -31,6 +48,7 @@ const Sidebar = () => {
     } else {
       setIsLoggedIn(false);
     }
+    getProfile();
   }, []);
 
   return (
@@ -49,6 +67,11 @@ const Sidebar = () => {
         onOpen={() => setOpen(!isOpen)}
         onClose={() => setOpen(!isOpen)}
       >
+        {user?.role === 1 && (
+          <div onClick={() => to("admin/photos")} className="menu-item">
+            Admin Panel
+          </div>
+        )}
         <div onClick={() => to("gallery")} className="menu-item">
           Gallery
         </div>
@@ -56,16 +79,16 @@ const Sidebar = () => {
           Clients
         </div>
         {isLoggedIn ? (
-          <div onClick={() => to("")} className="menu-item">
+          <div onClick={() => to("profile")} className="menu-item">
             Profile
           </div>
         ) : (
-          <div onClick={() => to("")} className="menu-item">
+          <div onClick={() => to("login")} className="menu-item">
             Login
           </div>
         )}
 
-        {isLoggedIn ? (
+        {isLoggedIn && (
           <li>
             <div
               onClick={() => {
@@ -75,12 +98,6 @@ const Sidebar = () => {
               className="menu-item"
             >
               Logout
-            </div>
-          </li>
-        ) : (
-          <li>
-            <div onClick={() => to("login")} className="menu-item">
-              Login
             </div>
           </li>
         )}

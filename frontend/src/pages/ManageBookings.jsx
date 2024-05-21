@@ -87,11 +87,12 @@ const ManageBookings = () => {
         theme="colored"
       />
       <SidePanel />
-      <div className="w-full p-10">
+      <div className="w-full p-2 lg:p-10">
         <div className="text-2xl">All Bookings</div>
-        <div className="mt-5">
+        <div className="mt-5 w-72 lg:w-full">
           <Table
             dataSource={bookings}
+            style={{ overflowX: "auto" }}
             pagination={{
               defaultPageSize: 20,
               showSizeChanger: true,
