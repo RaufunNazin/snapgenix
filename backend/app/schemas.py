@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr
+from typing import Optional
 
 
 class User(BaseModel) :
@@ -19,9 +20,11 @@ class Photo(BaseModel) :
     
 class Booking(BaseModel) :
     user_id : int
+    name: str
     date : str
     service_type : str
     status : int
+    description: Optional[str] = None
      
 class ResponseUser(BaseModel) :
     id : int

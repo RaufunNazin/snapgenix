@@ -5,10 +5,19 @@ import { IoStatsChart } from "react-icons/io5";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import Slider from "react-infinite-logo-slider";
 import { HiCheck } from "react-icons/hi";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "../Components/Footer";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [phone, setPhone] = useState(false);
+  const { state } = useLocation();
+  const checkPhone = () => {
+    setPhone(window?.screen?.width < 768 ? true : false);
+  };
   const pricingRef = useRef(null);
   const services = [
     {
@@ -67,6 +76,7 @@ const Home = () => {
         "Food styling",
         "Custom props",
       ],
+      value: "photo",
       popular: true,
     },
     {
@@ -79,6 +89,7 @@ const Home = () => {
         "Interior, Exterior shoot",
         "Food styling shoot",
       ],
+      value: "video",
       popular: false,
     },
     {
@@ -93,14 +104,38 @@ const Home = () => {
         "Pixel setup",
         "Marketing with trends",
       ],
+      value: "marketing",
       popular: false,
     },
   ];
 
+  useEffect(() => {
+    // if (state === "login") {
+    //   toast.success("Welcome Back!");
+    // } else if (state === "register") {
+    //   toast.success("Account created successfully!");
+    // }
+    checkPhone();
+    window.addEventListener("resize", checkPhone);
+    return () => {
+      window.removeEventListener("resize", checkPhone);
+    };
+  }, []);
+
   return (
     <div className="bg-xlightestgray">
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        draggable={true}
+        pauseOnHover={false}
+        theme="colored"
+      />
       <Navbar />
-
       {/* Hero */}
 
       <div className="flex flex-col items-center gap-y-10 px-2 py-8 lg:py-24">
@@ -115,7 +150,10 @@ const Home = () => {
           with our passionate crew.
         </div>
         <div className="flex flex-col lg:flex-row items-center gap-x-4 gap-y-2">
-          <button className="w-52 lg:w-fit border border-xblue bg-xblue uppercase text-white hover:bg-sky-500 hover:border-sky-500 transition-all duration-200 px-6 py-3 flex gap-x-4 justify-center items-center">
+          <button
+            onClick={() => navigate("/booking")}
+            className="w-52 lg:w-fit border border-xblue bg-xblue uppercase text-white hover:bg-sky-500 hover:border-sky-500 transition-all duration-200 px-6 py-3 flex gap-x-4 justify-center items-center"
+          >
             <div className="text-[12px] lg:text-[16px]">request a shoot</div>
             <div>
               <MdCamera className="w-5 lg:w-8 h-5 lg:h-8 text-white" />
@@ -204,41 +242,67 @@ const Home = () => {
           <img src="src/assets/food.png" alt="food" className="w-full" />
           <img src="src/assets/food.png" alt="food" className="w-full" />
         </div> */}
-        <Slider
-          width="270px"
-          duration={30}
-          pauseOnHover={true}
-          blurBorders={true}
-          blurBoderColor={"#FAFAFA"}
-        >
-          <Slider.Slide>
-            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
-          </Slider.Slide>
-          <Slider.Slide>
-            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
-          </Slider.Slide>
-          <Slider.Slide>
-            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
-          </Slider.Slide>
-        </Slider>
-        <Slider
-          width="270px"
-          duration={30}
-          pauseOnHover={true}
-          blurBorders={true}
-          blurBoderColor={"#FAFAFA"}
-          toRight={true}
-        >
-          <Slider.Slide>
-            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
-          </Slider.Slide>
-          <Slider.Slide>
-            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
-          </Slider.Slide>
-          <Slider.Slide>
-            <img src="src/assets/food.png" alt="any" className="w-48 lg:w-64" />
-          </Slider.Slide>
-        </Slider>
+        <div className="flex flex-col gap-y-3">
+          <Slider
+            width={phone ? "150px" : "270px"}
+            duration={30}
+            pauseOnHover={true}
+            blurBorders={phone ? false : true}
+            blurBoderColor={"#FAFAFA"}
+          >
+            <Slider.Slide>
+              <img
+                src="src/assets/food.png"
+                alt="any"
+                className="w-36 lg:w-64"
+              />
+            </Slider.Slide>
+            <Slider.Slide>
+              <img
+                src="src/assets/food.png"
+                alt="any"
+                className="w-36 lg:w-64"
+              />
+            </Slider.Slide>
+            <Slider.Slide>
+              <img
+                src="src/assets/food.png"
+                alt="any"
+                className="w-36 lg:w-64"
+              />
+            </Slider.Slide>
+          </Slider>
+          <Slider
+            width={phone ? "150px" : "270px"}
+            duration={30}
+            pauseOnHover={true}
+            blurBorders={true}
+            blurBoderColor={"#FAFAFA"}
+            toRight={true}
+          >
+            <Slider.Slide>
+              <img
+                src="src/assets/food.png"
+                alt="any"
+                className="w-48 lg:w-64"
+              />
+            </Slider.Slide>
+            <Slider.Slide>
+              <img
+                src="src/assets/food.png"
+                alt="any"
+                className="w-48 lg:w-64"
+              />
+            </Slider.Slide>
+            <Slider.Slide>
+              <img
+                src="src/assets/food.png"
+                alt="any"
+                className="w-48 lg:w-64"
+              />
+            </Slider.Slide>
+          </Slider>
+        </div>
       </div>
 
       {/* Clients */}
@@ -347,7 +411,10 @@ const Home = () => {
                 </div>
               </div>
               <div className="flex flex-col items-center gap-y-2">
-                <button className="border border-xblue bg-xblue text-white py-2 w-full font-semibold text-[20px] text-center">
+                <button
+                  onClick={() => navigate("/booking", { state: plan.value })}
+                  className="border border-xblue bg-xblue text-white py-2 w-full font-semibold text-[20px] text-center"
+                >
                   Choose Plan
                 </button>
                 <button className="border border-xblue bg-white text-xblue py-2 w-full font-semibold text-[20px] text-center">

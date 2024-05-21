@@ -35,15 +35,33 @@ const Footer = () => {
             <img src="src/assets/logo.png" alt="logo" className="h-4 lg:h-7" />
           </button>
           <div className="flex lg:flex-col gap-4 items-start">
-            <button className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150">
+            <button
+              onClick={() => navigate("/gallery")}
+              className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150"
+            >
               Gallery
             </button>
-            <button className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150">
+            <button
+              onClick={() => navigate("/clients")}
+              className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150"
+            >
               Clients
             </button>
-            <button className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150">
-              Contact
-            </button>
+            {localStorage.getItem("token") ? (
+              <button
+                onClick={() => navigate("/profile")}
+                className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150"
+              >
+                Profile
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate("/login")}
+                className="text-[12px] lg:text-[20px] font-light text-xdark hover:text-xblue transition-all duration-150"
+              >
+                Login
+              </button>
+            )}
           </div>
           <Tooltip title="Click to view" color={"#555555"} key={"location"}>
             <a

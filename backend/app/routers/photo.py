@@ -56,7 +56,13 @@ async def upload_photo(request: Request, photo: UploadFile = File(...), title: s
 
     return {"filename": photo.filename, "title": title, "description": description, "category": category, "photo_url": photo_url}
 
+# get all photos from the database
 @router.get("/photos", tags=['photo'])
+def get_photos(db: Session = Depends(get_db)):
+    photos = db.query(models.Photo).all()
+    return photos
+
+@router.get("/categories", tags=['photo'])
 def get_photos(db: Session = Depends(get_db)):
     photos = db.query(models.Photo).all()
     photo_dict = {}
@@ -83,3 +89,16 @@ def delete_photo(photo_id: int, db : Session = Depends(get_db), user = Depends(o
     db.delete(photo)
     db.commit()
     return {"detail": "Photo deleted successfully"}
+
+# update api
+@router.put("/photos/{photo_id}", tags=['photo'])
+def update_photo(photo_id: int, title: str, description: str, category: str, db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
+    check_authorization(user)
+    photo = db.query(models.Photo).filter(models.Photo.id == photo_id).first()
+    if photo is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Photo not found")
+    photo.title = title
+    photo.description = description
+    photo.category = category
+    db.commit()
+    return photo

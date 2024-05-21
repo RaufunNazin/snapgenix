@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from ..database import get_db, SessionLocal
 from .. import models, oauth2
-from ..models import Photo
+from ..models import Photo, Client
 import shutil
 import os
 from pydantic import BaseModel
@@ -35,7 +35,7 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
 
     # Save photo information to the database
     db = SessionLocal()
-    db_photo = Photo(photo=photo_url, name=name)
+    db_photo = Client(photo=photo_url, name=name)
     db.add(db_photo)
     db.commit()
     db.refresh(db_photo)
@@ -49,7 +49,18 @@ def get_clients(db: Session = Depends(get_db), user = Depends(oauth2.get_current
     clients = db.query(models.Client).all()
     return clients
 
-@router.delete("/clients/{id}", tags=['clients'])
+# update api
+@router.put("/clients/{id}", tags=['clients'])
+def update_client(id: int, name: str, db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
+    check_authorization(user)
+    client = db.query(models.Client).filter(models.Client.id == id).first()
+    if client is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Client not found")
+    db.query(models.Client).filter(models.Client.id == id).update({"name": name})
+    db.commit()
+    return {"message": "Client updated successfully"}
+
+@router.delete("/clients/{id}", status_code = 204, tags=['clients'])
 def delete_client(id: int, db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
     check_authorization(user)
     client = db.query(models.Client).filter(models.Client.id == id).first()

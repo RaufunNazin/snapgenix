@@ -7,7 +7,7 @@ from app.oauth2 import check_authorization
 
 router = APIRouter()
 
-@router.post("/bookings", tags=['booking'])
+@router.post("/bookings", status_code=201, tags=['booking'])
 def create_booking(booking: Booking, db: Session = Depends(get_db)):
     new_booking = models.Booking(**booking.dict())
     db.add(new_booking)
@@ -31,10 +31,17 @@ def search_booking(id: int = None, user_id: int = None, db: Session = Depends(ge
     else:
         return {"message": "Please provide either id or user_id"}
     
-    
-#update status of a booking and make it 1 and check if user is admin with patch api with booking id
-@router.patch("/bookings/{id}", tags=['booking'])
-def update_booking_status(id: int, db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
+
+@router.get("/bookings/{id}", tags=['booking'])
+def get_booking_by_id(id: int, db: Session = Depends(get_db)):
+    booking = db.query(models.Booking).filter(models.Booking.user_id == id).all()
+    if booking is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Booking not found")
+    return booking
+
+
+@router.get("/bookings/approve/{id}", status_code=200, tags=['booking'])
+def approve_booking(id: int, db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
     check_authorization(user)
     booking_db = db.query(models.Booking).filter(models.Booking.id == id).first()
     if booking_db is None:
@@ -43,8 +50,18 @@ def update_booking_status(id: int, db: Session = Depends(get_db), user = Depends
     db.commit()
     return {"message": "Booking approved successfully"}
 
+@router.get("/bookings/reject/{id}", status_code=200, tags=['booking'])
+def reject_booking(id: int, db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
+    check_authorization(user)
+    booking_db = db.query(models.Booking).filter(models.Booking.id == id).first()
+    if booking_db is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Booking not found")
+    db.query(models.Booking).filter(models.Booking.id == id).update({"status": 0})
+    db.commit()
+    return {"message": "Booking Rejected successfully"}
 
-@router.delete("/bookings", tags=['booking'])
+
+@router.delete("/bookings/{id}", status_code=204, tags=['booking'])
 def delete_booking(id: int, db: Session = Depends(get_db)):
     booking = db.query(models.Booking).filter(models.Booking.id == id).first()
     if booking is None:

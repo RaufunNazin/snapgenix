@@ -15,9 +15,11 @@ class Booking(Base):
     __tablename__ = "bookings"
     id = Column(Integer, primary_key=True, nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    name = Column(String(100), nullable=False)
     date = Column(String(20), nullable=False)
     service_type = Column(String(20), nullable=True)
     status = Column(Integer, nullable=False)
+    description = Column(String(300), nullable=True)
     user = relationship("User", back_populates="bookings")
     
 class Photo(Base):

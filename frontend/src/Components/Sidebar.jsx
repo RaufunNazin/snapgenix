@@ -20,6 +20,7 @@ const Sidebar = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     nav("/login");
     setModal2Open(false);
   };
@@ -48,15 +49,22 @@ const Sidebar = () => {
         onOpen={() => setOpen(!isOpen)}
         onClose={() => setOpen(!isOpen)}
       >
-        <div onClick={() => to("")} className="menu-item">
-          About
-        </div>
-        <div onClick={() => to("")} className="menu-item">
+        <div onClick={() => to("gallery")} className="menu-item">
           Gallery
         </div>
-        <div onClick={() => to("")} className="menu-item">
-          Contact
+        <div onClick={() => to("clients")} className="menu-item">
+          Clients
         </div>
+        {isLoggedIn ? (
+          <div onClick={() => to("")} className="menu-item">
+            Profile
+          </div>
+        ) : (
+          <div onClick={() => to("")} className="menu-item">
+            Login
+          </div>
+        )}
+
         {isLoggedIn ? (
           <li>
             <div
