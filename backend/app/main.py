@@ -15,6 +15,15 @@ app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
 origins = [
     "http://localhost:5173",
+    "https://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost",
+    "https://localhost",
+    "http://localhost:8000",
+    "https://localhost:8000",
+    "https://snapgenix.com",
+    "https://www.snapgenix.com",
+    "http://snapgenix.com",
 ]
 
 app.add_middleware(
