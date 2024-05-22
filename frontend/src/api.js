@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: `https://snapgenix.com:8000/api`,
+  baseURL: `https://snapgenix.com/api`,
   timeout: 30000,
   withCredentials: true,
   headers: {
