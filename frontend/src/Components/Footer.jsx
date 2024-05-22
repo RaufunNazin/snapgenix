@@ -32,7 +32,7 @@ const Footer = () => {
       <div className="flex flex-col gap-y-8 lg:gap-y-16 px-2 lg:px-48 bg-xlightergray py-8 lg:py-16">
         <div className="flex flex-wrap justify-between items-start gap-4">
           <button onClick={() => navigate("/")}>
-            <img src="src/assets/logo.png" alt="logo" className="h-4 lg:h-7" />
+            <img src="/logo.png" alt="logo" className="h-4 lg:h-7" />
           </button>
           <div className="flex lg:flex-col gap-4 items-start">
             <button

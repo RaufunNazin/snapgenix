@@ -47,22 +47,22 @@ const Home = () => {
     {
       name: "Sahriar Sayem",
       role: "CEO & Founder",
-      image: "src/assets/sayem.jpg",
+      image: "/sayem.jpg",
     },
     {
       name: "Md Iftaykhar Mahmud",
       role: "Chief Marketing Officer",
-      image: "src/assets/iftaykhar.jpg",
+      image: "/iftaykhar.jpg",
     },
     {
       name: "Mehrab Hossain Opi",
       role: "Video Editor",
-      image: "src/assets/opi.jpg",
+      image: "/opi.jpg",
     },
     {
       name: "Rafsun Karim",
       role: "Art Director",
-      image: "src/assets/rafsun.jpg",
+      image: "/rafsun.jpg",
     },
   ];
 

@@ -28,7 +28,7 @@ const Navbar = ({ active }) => {
   return (
     <div className="flex justify-between items-center px-2 lg:px-32 py-3 lg:py-5">
       <button onClick={() => navigate("/")}>
-        <img src="src/assets/logo.png" alt="logo" className="h-5 lg:h-7" />
+        <img src="/logo.png" alt="logo" className="h-5 lg:h-7" />
       </button>
       <div className="hidden lg:grid grid-cols-3 gap-x-10">
         <button

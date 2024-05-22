@@ -55,7 +55,7 @@ const Login = () => {
         onClick={() => navigate("/")}
         className="fixed top-8 flex items-center gap-x-4 lg:top-16"
       >
-        <img src="src/assets/logo.png" alt="logo" className="h-12" />
+        <img src="/logo.png" alt="logo" className="h-12" />
       </button>
       <div className="flex flex-col items-center gap-y-2">
         <p className="text-3xl font-black text-xgray lg:text-4xl">
