@@ -28,7 +28,6 @@ const App = () => {
         })
         .catch((err) => {
           console.log(err);
-          toast.error(err.response.data?.detail || err.message);
         });
     };
 
