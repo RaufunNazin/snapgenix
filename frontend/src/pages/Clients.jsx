@@ -25,11 +25,11 @@ const Clients = () => {
   return (
     <div className="min-h-screen">
       <Navbar active="clients" />
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center mx-2 lg:mx-32">
         {clients.map((client) => (
           <div
             key={client.id}
-            className="m-5 p-5 bg-white shadow-md rounded-md"
+            className="m-1 lg:m-3 p-1 lg:p-3 bg-white shadow-sm lg:shadow-md rounded-md"
           >
             <img
               src={client.photo}

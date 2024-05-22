@@ -10,9 +10,12 @@ import Footer from "../Components/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import api from "../api";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [photos, setPhotos] = useState([]);
+  const [clients, setClients] = useState([]);
   const [phone, setPhone] = useState(false);
   const { state } = useLocation();
   const checkPhone = () => {
@@ -109,6 +112,36 @@ const Home = () => {
     },
   ];
 
+  const getClients = () => {
+    api
+      .get("/clients", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setClients(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getPhotos = () => {
+    api
+      .get("/photos", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setPhotos(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     // if (state === "login") {
     //   toast.success("Welcome Back!");
@@ -116,6 +149,8 @@ const Home = () => {
     //   toast.success("Account created successfully!");
     // }
     checkPhone();
+    getClients();
+    getPhotos();
     window.addEventListener("resize", checkPhone);
     return () => {
       window.removeEventListener("resize", checkPhone);
@@ -205,104 +240,18 @@ const Home = () => {
         <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Explore Our Creative Projects
         </div>
-        {/* <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 overflow-auto h-[640px]">
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-          <img src="src/assets/food.png" alt="food" className="w-full" />
-        </div> */}
-        <div className="flex flex-col gap-y-3">
-          <Slider
-            width={phone ? "150px" : "270px"}
-            duration={30}
-            pauseOnHover={true}
-            blurBorders={phone ? false : true}
-            blurBoderColor={"#FAFAFA"}
-          >
-            <Slider.Slide>
+        <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 overflow-auto h-[640px]">
+          {photos?.length > 0 &&
+            photos.map((photo) => (
               <img
-                src="src/assets/food.png"
-                alt="any"
-                className="w-36 lg:w-64"
+                key={photo.id}
+                src={photo.photo}
+                alt={photo.title}
+                className="w-full h-full object-cover"
               />
-            </Slider.Slide>
-            <Slider.Slide>
-              <img
-                src="src/assets/food.png"
-                alt="any"
-                className="w-36 lg:w-64"
-              />
-            </Slider.Slide>
-            <Slider.Slide>
-              <img
-                src="src/assets/food.png"
-                alt="any"
-                className="w-36 lg:w-64"
-              />
-            </Slider.Slide>
-          </Slider>
-          <Slider
-            width={phone ? "150px" : "270px"}
-            duration={30}
-            pauseOnHover={true}
-            blurBorders={true}
-            blurBoderColor={"#FAFAFA"}
-            toRight={true}
-          >
-            <Slider.Slide>
-              <img
-                src="src/assets/food.png"
-                alt="any"
-                className="w-48 lg:w-64"
-              />
-            </Slider.Slide>
-            <Slider.Slide>
-              <img
-                src="src/assets/food.png"
-                alt="any"
-                className="w-48 lg:w-64"
-              />
-            </Slider.Slide>
-            <Slider.Slide>
-              <img
-                src="src/assets/food.png"
-                alt="any"
-                className="w-48 lg:w-64"
-              />
-            </Slider.Slide>
-          </Slider>
+            ))}
         </div>
+        <div className="flex flex-col gap-y-3"></div>
       </div>
 
       {/* Clients */}
@@ -313,32 +262,22 @@ const Home = () => {
         </div>
         <Slider
           width="250px"
-          duration={40}
+          duration={30}
           pauseOnHover={false}
           blurBorders={true}
           blurBoderColor={"#FAFAFA"}
         >
-          <Slider.Slide>
-            <img
-              src="src/assets/logo.png"
-              alt="any"
-              className="w-24 lg:w-32 grayscale"
-            />
-          </Slider.Slide>
-          <Slider.Slide>
-            <img
-              src="src/assets/logo.png"
-              alt="any2"
-              className="w-24 lg:w-32"
-            />
-          </Slider.Slide>
-          <Slider.Slide>
-            <img
-              src="src/assets/logo.png"
-              alt="any3"
-              className="w-24 lg:w-32"
-            />
-          </Slider.Slide>
+          {clients.map((client) => (
+            <div key={client.id}>
+              <Slider.Slide>
+                <img
+                  src={client.photo}
+                  alt={client.name}
+                  className="w-[200px]"
+                />
+              </Slider.Slide>
+            </div>
+          ))}
         </Slider>
       </div>
 

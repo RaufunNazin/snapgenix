@@ -110,7 +110,6 @@ const ManageClients = () => {
               accept="image/png"
               onChange={(e) => {
                 setFile(e.target.files[0]);
-                console.log(e.target.files[0]);
               }}
             />
           </div>

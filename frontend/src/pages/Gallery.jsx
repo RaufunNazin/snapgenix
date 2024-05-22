@@ -25,10 +25,10 @@ const Gallery = () => {
   return (
     <div className="min-h-screen">
       <Navbar active="photos" />
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center mx-2">
         {photos.map((photo) => (
-          <div key={photo.id} className="">
-            <img src={photo.photo} alt={photo.title} className="w-40" />
+          <div key={photo.id} className="w-1/5 p-2">
+            <img src={photo.photo} alt={photo.title} className="w-full" />
           </div>
         ))}
       </div>
