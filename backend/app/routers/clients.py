@@ -31,7 +31,7 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
         file_object.write(photo.file.read())
 
     # Construct the URL for the uploaded photo
-    photo_url = f"{base_url}clients/{name}.png"
+    photo_url = f"/clients/{name}.png"
 
     # Save photo information to the database
     db = SessionLocal()
