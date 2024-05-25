@@ -1,5 +1,6 @@
 echo "switching to main"
 git checkout main
+git pull origin main
 
 echo "building frontend"
 npm run build

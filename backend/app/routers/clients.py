@@ -22,7 +22,7 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
     current_directory = os.path.dirname(os.path.realpath(__file__))
 
     # Create a new folder named 'photos' in the current directory if it doesn't exist
-    folder_path = os.path.join(current_directory, "..", "..","assets" ,"clients",)
+    folder_path = os.path.join(current_directory, "..", "..", "..", "frontend", "public", "clients")
     os.makedirs(folder_path, exist_ok=True)
 
     # Save the uploaded photo to the specified folder
@@ -31,7 +31,7 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
         file_object.write(photo.file.read())
 
     # Construct the URL for the uploaded photo
-    photo_url = f"{base_url}assets/clients/{name}.png"
+    photo_url = f"{base_url}clients/{name}.png"
 
     # Save photo information to the database
     db = SessionLocal()
