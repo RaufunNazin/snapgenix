@@ -35,7 +35,7 @@ async def upload_photo(request: Request, photo: UploadFile = File(...), title: s
     current_directory = os.path.dirname(os.path.realpath(__file__))
 
     # Create a new folder named 'photos' in the current directory if it doesn't exist
-    folder_path = os.path.join(current_directory, "..", "..", "..", "frontend", "public")
+    folder_path = os.path.join(current_directory, "..", "..", "static", "images")
     os.makedirs(folder_path, exist_ok=True)
 
     # Save the uploaded photo to the specified folder
@@ -44,7 +44,7 @@ async def upload_photo(request: Request, photo: UploadFile = File(...), title: s
         file_object.write(photo.file.read())
 
     # Construct the URL for the uploaded photo
-    photo_url = f"/image{title}.{photo.filename.split('.')[-1]}"
+    photo_url = f"{base_url}api/static/images/image{title}.{photo.filename.split('.')[-1]}"
 
     # Save photo information to the database
     db = SessionLocal()
