@@ -39,12 +39,12 @@ async def upload_photo(request: Request, photo: UploadFile = File(...), title: s
     os.makedirs(folder_path, exist_ok=True)
 
     # Save the uploaded photo to the specified folder
-    file_location = os.path.join(folder_path, f"images-{title}.png")
+    file_location = os.path.join(folder_path, f"image{title}.png")
     with open(file_location, "wb") as file_object:
         file_object.write(photo.file.read())
 
     # Construct the URL for the uploaded photo
-    photo_url = f"/images-{title}.png"
+    photo_url = f"/image{title}.png"
 
     # Save photo information to the database
     db = SessionLocal()

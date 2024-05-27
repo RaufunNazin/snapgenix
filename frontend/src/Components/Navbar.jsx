@@ -30,7 +30,7 @@ const Navbar = ({ active }) => {
       <button onClick={() => navigate("/")}>
         <img src="/logo.png" alt="logo" className="h-5 lg:h-7" />
       </button>
-      <div className="hidden lg:grid grid-cols-3 gap-x-10">
+      <div className="hidden md:grid grid-cols-3 gap-x-10">
         <button
           onClick={() => navigate("/gallery")}
           className={`uppercase ${
