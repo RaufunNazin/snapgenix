@@ -247,7 +247,7 @@ const Home = () => {
                 key={photo.id}
                 src={photo.photo}
                 alt={photo.title}
-                className="w-full h-full object-cover"
+                className="w-full object-cover"
               />
             ))}
         </div>
