@@ -22,16 +22,16 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
     current_directory = os.path.dirname(os.path.realpath(__file__))
 
     # Create a new folder named 'photos' in the current directory if it doesn't exist
-    folder_path = os.path.join(current_directory, "..", "..", "..", "frontend", "public", "clients")
+    folder_path = os.path.join(current_directory, "..", "..", "..", "frontend", "public")
     os.makedirs(folder_path, exist_ok=True)
 
     # Save the uploaded photo to the specified folder
-    file_location = os.path.join(folder_path, f"{name}.png")
+    file_location = os.path.join(folder_path, f"client-{name}.png")
     with open(file_location, "wb") as file_object:
         file_object.write(photo.file.read())
 
     # Construct the URL for the uploaded photo
-    photo_url = f"/clients/{name}.png"
+    photo_url = f"/client-{name}.png"
 
     # Save photo information to the database
     db = SessionLocal()
@@ -41,7 +41,7 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
     db.refresh(db_photo)
     db.close()
 
-    return {"photo": photo.filename, "title": name}
+    return {"photo": photo_url, "title": name}
 
 
 @router.get("/clients", tags=['clients'])
