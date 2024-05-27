@@ -26,12 +26,12 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
     os.makedirs(folder_path, exist_ok=True)
 
     # Save the uploaded photo to the specified folder
-    file_location = os.path.join(folder_path, f"client{name}.png")
+    file_location = os.path.join(folder_path, f"client{name}.{photo.filename.split('.')[-1]}")
     with open(file_location, "wb") as file_object:
         file_object.write(photo.file.read())
 
     # Construct the URL for the uploaded photo
-    photo_url = f"/client{name}.png"
+    photo_url = f"/client{name}.{photo.filename.split('.')[-1]}"
 
     # Save photo information to the database
     db = SessionLocal()
