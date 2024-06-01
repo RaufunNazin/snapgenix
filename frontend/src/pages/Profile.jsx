@@ -78,18 +78,18 @@ const Profile = () => {
   }, []);
   return (
     <div className="min-h-screen flex flex-col justify-between">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div>
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
         <Navbar active="profile" />
         <div className="mx-2 lg:mx-32 my-2 lg:my-16">
           <div className="bg-sky-50 p-5 my-5">
@@ -115,9 +115,9 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          {bookings.length !== 0 && (
+          <div className="text-xlightgray">My Bookings</div>
+          {bookings.length > 0 ? (
             <div>
-              <div className="text-xlightgray">My Bookings</div>
               <div>
                 <Table
                   dataSource={bookings}
@@ -193,6 +193,21 @@ const Profile = () => {
                   ]}
                 />
               </div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-y-2">
+              <img
+                src="no_image.png"
+                alt="empty"
+                className="w-full md:w-1/5 mx-auto"
+              />
+              <div className="text-xlightgray">No bookings found</div>
+              <button
+                onClick={() => navigate("/booking")}
+                className="border border-xblue bg-xblue text-white py-2 w-full md:w-1/4 font-semibold text-[20px] text-center"
+              >
+                Request a Shoot
+              </button>
             </div>
           )}
 

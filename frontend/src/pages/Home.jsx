@@ -11,6 +11,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../api";
+import Masonry from "react-masonry-css";
+import "../index.css";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -112,6 +114,13 @@ const Home = () => {
     },
   ];
 
+  const breakpointColumnsObj = {
+    default: 5,
+    1100: 4,
+    700: 3,
+    500: 2,
+  };
+
   const getClients = () => {
     api
       .get("/clients", {
@@ -210,15 +219,15 @@ const Home = () => {
 
       {/* Services */}
 
-      <div className="py-8 lg:py-24">
-        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
+      <div className="py-8 lg:py-24 relative">
+        <div className="text-[20px] bg-xblue py-5 text-white sticky top-0 z-50 uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Discover Our Awesome Services
         </div>
         <div className="flex flex-col lg:flex-row justify-evenly mx-2 lg:mx-32 gap-y-2">
           {services.map((service, i) => (
             <div
               key={i}
-              className="w-full lg:w-[420px] border border-xblue py-5 lg:py-10 px-4 lg:px-8 flex flex-col gap-y-2 lg:gap-y-6"
+              className="w-full hover:scale-125 transition-all duration-200 lg:w-[420px] border border-xblue py-5 lg:py-10 px-4 lg:px-8 flex flex-col gap-y-2 lg:gap-y-6"
             >
               <div className="flex items-center gap-x-3">
                 <div>{service.icon}</div>
@@ -236,20 +245,28 @@ const Home = () => {
 
       {/* Gallery */}
 
-      <div className="py-8 lg:py-24 mx-2">
-        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
+      <div className="py-8 lg:py-24 relative">
+        <div className="text-[20px] bg-xblue py-5 text-white sticky top-0 z-50 uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Explore Our Creative Projects
         </div>
-        <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 overflow-auto h-[640px]">
-          {photos?.length > 0 &&
-            photos.map((photo) => (
-              <img
-                key={photo.id}
-                src={photo.photo}
-                alt={photo.title}
-                className="w-full object-cover"
-              />
-            ))}
+
+        <div className="overflow-auto h-screen mx-2">
+          {photos?.length > 0 && (
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {photos.map((photo) => (
+                <img
+                  key={photo.id}
+                  src={photo.photo}
+                  alt={photo.title}
+                  className="w-full object-cover"
+                />
+              ))}
+            </Masonry>
+          )}
         </div>
         <div className="flex flex-col gap-y-3"></div>
       </div>
@@ -257,23 +274,26 @@ const Home = () => {
       {/* Clients */}
 
       <div className="py-8 lg:py-24">
-        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
+        <div className="text-[20px] bg-xblue py-5 text-white sticky top-0 z-50 uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           View Our Cherished Customers
         </div>
         <Slider
           width="250px"
-          duration={30}
+          duration={40}
           pauseOnHover={false}
           blurBorders={true}
           blurBoderColor={"#FAFAFA"}
         >
           {clients.map((client) => (
-            <div key={client.id}>
+            <div
+              key={client.id}
+              className="flex items-center justify-center p-2"
+            >
               <Slider.Slide>
                 <img
                   src={client.photo}
                   alt={client.name}
-                  className="w-[200px]"
+                  className="w-[100px] md:w-[200px] grayscale"
                 />
               </Slider.Slide>
             </div>
@@ -284,7 +304,7 @@ const Home = () => {
       {/* Team */}
 
       <div className="py-8 lg:py-24">
-        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
+        <div className="text-[20px] bg-xblue py-5 text-white sticky top-0 z-50 uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Meet Our Dedicated Team
         </div>
         <div className="mx-2 lg:mx-32 grid grid-cols-2 lg:grid-cols-4 items-center">
@@ -314,7 +334,7 @@ const Home = () => {
       {/* Pricing */}
 
       <div className="py-8 lg:py-24" ref={pricingRef}>
-        <div className="text-[20px] text-xdark uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
+        <div className="text-[20px] bg-xblue py-5 text-white sticky top-0 z-50 uppercase font-bold lg:text-[40px] text-center mb-6 lg:mb-20">
           Pick or Personalize Your Plan
         </div>
         <div className="mx-2 lg:mx-32 flex flex-wrap justify-evenly gap-2">
@@ -355,9 +375,6 @@ const Home = () => {
                   className="border border-xblue bg-xblue text-white py-2 w-full font-semibold text-[20px] text-center"
                 >
                   Choose Plan
-                </button>
-                <button className="border border-xblue bg-white text-xblue py-2 w-full font-semibold text-[20px] text-center">
-                  Call to Customize
                 </button>
               </div>
             </div>

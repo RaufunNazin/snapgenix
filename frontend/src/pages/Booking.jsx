@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { DatePicker, Select } from "antd";
@@ -8,7 +8,7 @@ import api from "../api";
 import { ToastContainer, toast } from "react-toastify";
 dayjs.extend(customParseFormat);
 import "react-toastify/dist/ReactToastify.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Booking = () => {
   const { state } = useLocation();
@@ -18,6 +18,8 @@ const Booking = () => {
   const [date, setDate] = useState(today);
   const [type, setType] = useState("photo");
   const [description, setDescription] = useState("");
+  const [user, setUser] = useState({});
+  const navigate = useNavigate();
   const types = [
     {
       label: "Photography",
@@ -32,7 +34,26 @@ const Booking = () => {
       value: "marketing",
     },
   ];
+  const getProfile = () => {
+    api
+      .get("/me", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          navigate("/login", { state: "booking" });
+        }
+        console.log(err);
+      });
+  };
   const submitBooking = () => {
+    getProfile();
     if (!name || !date || !type) {
       toast.error("Please fill all fields");
       return;
@@ -41,7 +62,7 @@ const Booking = () => {
       .post(
         "/bookings",
         {
-          user_id: JSON.parse(localStorage.getItem("user")).id,
+          user_id: JSON.parse(localStorage.getItem("user"))?.id,
           name: name,
           date: date,
           service_type: type,
@@ -82,7 +103,7 @@ const Booking = () => {
           pauseOnHover={false}
           theme="colored"
         />
-        <div className="mx-2 lg:mx-32 mt-2 lg:mt-16">
+        <div className="mx-2 lg:mx-64 mt-2 lg:mt-16">
           <div className="text-xl lg:text-2xl text-xdark font-light">
             Request a booking
           </div>

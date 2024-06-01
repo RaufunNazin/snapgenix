@@ -24,6 +24,9 @@ const Login = () => {
       })
       .then((res) => {
         if (res.status === 200) {
+          if (state === "booking") {
+            navigate("/booking");
+          }
           navigate("/", { state: "login" });
           localStorage.setItem("token", res.data.access_token);
         }
@@ -36,6 +39,7 @@ const Login = () => {
 
   useEffect(() => {
     if (state === "logout") toast.success("Logged out successfully");
+    if (state === "booking") toast.error("Login to book a service");
   }, []);
 
   return (

@@ -106,3 +106,32 @@ p {
     display: block;
   }
 }
+
+.my-masonry-grid {
+  display: flex;
+  margin-left: -15px; /* gutter size offset */
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 15px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > img {
+  margin-bottom: 15px; /* space between items */
+}
+
+/* Optional, different gutter size on mobile */
+@media (max-width: 800px) {
+  .my-masonry-grid {
+    margin-left: -7.5px; /* gutter size offset */
+  }
+  .my-masonry-grid_column {
+    padding-left: 7.5px; /* gutter size offset */
+  }
+  .my-masonry-grid_column > img {
+    margin-bottom: 7.5px; /* space between items */
+  }
+}
