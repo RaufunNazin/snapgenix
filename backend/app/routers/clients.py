@@ -45,7 +45,7 @@ async def upload_client(request: Request, photo: UploadFile = File(...), name: s
 
 
 @router.get("/clients", tags=['clients'])
-def get_clients(db: Session = Depends(get_db), user = Depends(oauth2.get_current_user)):
+def get_clients(db: Session = Depends(get_db)):
     clients = db.query(models.Client).all()
     return clients
 

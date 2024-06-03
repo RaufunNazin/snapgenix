@@ -16,4 +16,4 @@ def save_photo(photo) :
 
 # generate random string of length 10
 def random_string() :
-    return ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=32))
